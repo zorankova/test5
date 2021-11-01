@@ -1,29 +1,37 @@
-import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseUUIDPipe, Patch, UseGuards } from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "../auth/jwt.auth.guard";
-import { CreateOneDto } from "./dto/createOne.dto";
-import { UpdateOneDto } from "./dto/updateOne.dto";
+import { CommonValidationPipe } from "../utils/updateValidationPipe";
+import { AuthorsService } from "./authors.service";
+import { UpdateAuthorDto } from "./dto/update.dto";
 
-@Controller('authors')
+@Controller("authors")
+@ApiBearerAuth()
+@ApiTags("Authors")
 @UseGuards(JwtAuthGuard)
 export class AuthorsController {
+  constructor(
+    private authorService: AuthorsService,
+  ) {}
 
   @Get()
   getAll() {
-    return [];
+    return this.authorService.findAll();
   }
 
   @Get("/:id")
-  getOne(@Param('id') id: string) {
-    return [{exampleFor: id}];
+  getOne(@Param("id", ParseUUIDPipe) id: string) {
+
+    return this.authorService.findOneById(id);
   }
 
   @Patch("/:id")
-  updateOne(@Body() UpdateOne: UpdateOneDto) {
-    return {UpdateOne};
-  }
+  async updateOne(
+  @Param("id", ParseUUIDPipe) id: string,
+    @Body(CommonValidationPipe) props: UpdateAuthorDto,
+  ) {
+    const created = await this.authorService.update(id, props);
 
-  @Post()
-  createOne(@Body() createOne: CreateOneDto) {
-    return {createOne};
+    return this.authorService.findOneById(created.id);
   }
 }

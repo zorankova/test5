@@ -13,15 +13,13 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/src/main",
     "prelint": "rimraf dist && npm run requirements-ckeck",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "preinstall": "rimraf dist && npm run requirements-ckeck",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r dotenv/config -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
@@ -31,7 +29,12 @@
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/passport": "^8.0.1",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/swagger": "^5.1.4",
     "@nestjs/typeorm": "^8.0.2",
+    "@types/bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
@@ -41,6 +44,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "semver": "^7.3.5",
+    "swagger-ui-express": "^4.1.6",
     "typeorm": "^0.2.38"
   },
   "devDependencies": {
