@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, ParseUUIDPipe, Patch, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "../auth/jwt.auth.guard";
-import { CommonValidationPipe } from "../utils/updateValidationPipe";
+import { CommonValidationPipe } from "../utils/commonValidationPipe";
 import { AuthorsService } from "./authors.service";
 import { UpdateAuthorDto } from "./dto/update.dto";
 

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, ParseUUIDPipe, Patch, Post, Request, UseG
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "../auth/jwt.auth.guard";
 import { Author } from "../authors/author.entity";
-import { CommonValidationPipe } from "../utils/updateValidationPipe";
+import { CommonValidationPipe } from "../utils/commonValidationPipe";
 import { ArticleService } from "./article.service";
 import { CreateArticleDto } from "./dto/create.dto";
 import { UpdateArticleDto } from "./dto/update.dto";

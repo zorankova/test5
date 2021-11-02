@@ -1,13 +1,14 @@
-import { Expose } from "class-transformer";
 import { Article } from "../../article/article.entity";
 
-@Expose()
 export class NewsItemDto {
-  constructor(props: Article) {
-    this.title = props.title;
-    this.body = props.body;
-    this.authorId = props.author.id;
-    this.authorName = props.author.name;
+  static buildFromArticle(article: Article) {
+    const item = new NewsItemDto();
+    item.title = article.title;
+    item.body = article.body;
+    item.authorId = article.author.id;
+    item.authorName = article.author.name;
+
+    return item;
   }
 
   title: string;

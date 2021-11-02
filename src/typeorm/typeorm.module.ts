@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { join } from "path/posix";
 import { ConfigModule } from "../config/config.module";
+import { ConfigService } from "../config/config.service";
 
 @Module({
   imports: [
@@ -13,14 +13,14 @@ import { ConfigModule } from "../config/config.module";
       ],
       useFactory: (configService: ConfigService) => ({
         type: "postgres",
-        host: configService.get("TYPEORM_HOST"),
-        port: parseInt(configService.get("TYPEORM_PORT"), 10),
-        username: configService.get("TYPEORM_USERNAME"),
-        password: configService.get("TYPEORM_PASSWORD"),
-        database: configService.get("TYPEORM_DATABASE"),
-        entities: [join(__dirname, "**", configService.get("TYPEORM_ENTITIES")) ],
-        synchronize: configService.get("TYPEORM_SYNCHRONIZE") === "true",
-        dropSchema: configService.get("TYPEORM_DROP_SCHEMA") === "true",
+        host: configService.TYPEORM_HOST,
+        port: configService.TYPEORM_PORT,
+        username: configService.TYPEORM_USERNAME,
+        password: configService.TYPEORM_PASSWORD,
+        database: configService.TYPEORM_DATABASE,
+        entities: [join(__dirname, "**", configService.TYPEORM_ENTITIES) ],
+        synchronize: configService.TYPEORM_SYNCHRONIZE,
+        dropSchema: configService.TYPEORM_DROP_SCHEMA,
         keepConnectionAlive: false,
         autoLoadEntities: true,
       }),

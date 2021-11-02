@@ -17,5 +17,5 @@ export class QueryDto {
   @Transform(({value}) => parseInt(value, 10))
   @IsNumber()
   @IsPositive()
-  limit = 3;
+  limit = 10;
 }

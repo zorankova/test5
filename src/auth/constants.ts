@@ -1,4 +1,5 @@
+import { ConfigService } from "../config/config.service";
+
 export const jwtConstants = {
-  secret: "SuperSecretKey123",
-  // secret: process.env.JWT_KEY /* */,
+  secret: ConfigService.getInstance().JWT_KEY,
 };
